@@ -1,85 +1,159 @@
 'use client';
 
+import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Calendar, MapPin, Award } from 'lucide-react';
-
+import { SectionHeader } from '@/components/ui/section-header';
 import { Card, CardContent } from '@/components/ui/card';
-import { education } from '@/lib/constants';
-import { fadeIn, staggerContainer } from '@/lib/motion';
+import { fadeIn } from '@/lib/motion';
 
 export default function EducationPage() {
 	return (
-		<div className="py-16 md:py-24">
-			<div className="container">
-				<motion.div
-					variants={staggerContainer()}
-					initial="hidden"
-					animate="show"
-					className="max-w-3xl mx-auto"
-				>
-					<motion.h1
-						variants={fadeIn('down', 0.2)}
-						className="text-4xl font-bold mb-6"
+		<section className="py-20">
+			<div className="container px-4">
+				<SectionHeader
+					title="Education"
+					description="My academic journey — learning, growing, and building step by step."
+				/>
+
+				<div className="mt-16 space-y-14">
+
+					{/* 🎓 B.Tech */}
+					<motion.div
+						variants={fadeIn('up', 0.1)}
+						initial="hidden"
+						animate="show"
+						className="grid md:grid-cols-2 gap-10 items-center"
 					>
-						Education
-					</motion.h1>
-					<motion.p
-						variants={fadeIn('down', 0.3)}
-						className="text-lg text-muted-foreground mb-12"
+						<Card className="card-gradient">
+							<CardContent className="p-6">
+								<h3 className="text-xl font-bold">
+									B.Tech – Electronics & Communication Engineering
+								</h3>
+
+								<p className="text-muted-foreground mt-1">
+									<Link
+										href="https://www.kluniversity.in/"
+										target="_blank"
+										className="text-primary hover:underline"
+									>
+										KL University, Hyderabad
+									</Link>
+								</p>
+
+								<div className="flex gap-4 mt-3 text-sm text-muted-foreground">
+									<span>2023 – 2027 (Expected)</span>
+									<span>CGPA: 9.83</span>
+								</div>
+
+								<p className="mt-4 text-sm text-muted-foreground">
+									Focused on Embedded Systems, Communication Technologies, and
+									real-world AI-driven engineering solutions.
+								</p>
+							</CardContent>
+						</Card>
+
+						{/* Graduation GIF – Bigger + Transparent */}
+						<div className="flex justify-center">
+							<motion.img
+								src="/gifs/education/graduation-schl.gif"
+								alt="Graduation animation"
+								className="w-64 h-64 object-contain bg-transparent"
+								animate={{ y: [0, -18, 0] }}
+								whileHover={{ scale: 1.1, rotate: 2 }}
+								transition={{ repeat: Infinity, duration: 3 }}
+							/>
+						</div>
+					</motion.div>
+
+					{/* 📘 Intermediate */}
+					<motion.div
+						variants={fadeIn('up', 0.2)}
+						initial="hidden"
+						animate="show"
+						className="grid md:grid-cols-2 gap-10 items-center"
 					>
-						My academic journey and achievements in the field of engineering.
-					</motion.p>
+						{/* Studying Girl GIF */}
+						<div className="flex justify-center order-2 md:order-1">
+							<motion.img
+								src="/gifs/education/girlgif.gif"
+								alt="Student studying animation"
+								className="w-60 h-60 object-contain bg-transparent"
+								animate={{ y: [0, -10, 0] }}
+								whileHover={{ scale: 1.08 }}
+								transition={{ repeat: Infinity, duration: 3.5 }}
+							/>
+						</div>
 
-					<div className="space-y-8">
-						{education.map((edu, index) => (
-							<motion.div
-								key={index}
-								variants={fadeIn('up', 0.2 * index)}
-								className="relative"
-							>
-								<Card className="card-gradient">
-									<CardContent className="p-6">
-										<div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-											<div>
-												<h2 className="text-2xl font-semibold">{edu.degree}</h2>
-												<p className="text-primary">{edu.field}</p>
-											</div>
-											{edu.gpa && (
-												<p className="text-lg font-semibold mt-2 md:mt-0">
-													GPA: {edu.gpa}
-												</p>
-											)}
-										</div>
+						<Card className="card-gradient order-1 md:order-2">
+							<CardContent className="p-6">
+								<h3 className="text-xl font-bold">
+									Intermediate (MPC)
+								</h3>
 
-										<div className="space-y-3">
-											<div className="flex items-center text-muted-foreground">
-												<MapPin className="h-4 w-4 mr-2" />
-												{edu.institution}, {edu.location}
-											</div>
-											<div className="flex items-center text-muted-foreground">
-												<Calendar className="h-4 w-4 mr-2" />
-												{edu.startDate} - {edu.endDate}
-											</div>
-										</div>
+								<p className="text-muted-foreground mt-1">
+									Gayathri Junior College
+								</p>
 
-										<div className="mt-6">
-											<h3 className="text-lg font-semibold mb-3">Achievements</h3>
-											<ul className="space-y-2">
-												{edu.achievements.map((achievement, i) => (
-													<li key={i} className="flex items-start">
-														<Award className="h-5 w-5 mr-2 text-primary shrink-0 mt-0.5" />
-														<span className="text-muted-foreground">{achievement}</span>
-													</li>
-												))}
-											</ul>
-										</div>
-									</CardContent>
-								</Card>
-							</motion.div>
-						))}
-					</div>
-				</motion.div>
+								<div className="flex gap-4 mt-3 text-sm text-muted-foreground">
+									<span>2021 – 2023</span>
+									<span>CGPA: 9.8</span>
+								</div>
+
+								<p className="mt-4 text-sm text-muted-foreground">
+									Built a strong foundation in Mathematics, Physics, and Chemistry
+									that shaped analytical and logical thinking.
+								</p>
+							</CardContent>
+						</Card>
+					</motion.div>
+
+					{/* 🏫 High School */}
+					<motion.div
+						variants={fadeIn('up', 0.3)}
+						initial="hidden"
+						animate="show"
+						className="grid md:grid-cols-2 gap-10 items-center"
+					>
+						<Card className="card-gradient">
+							<CardContent className="p-6">
+								<h3 className="text-xl font-bold">
+									High School
+								</h3>
+
+								<p className="text-muted-foreground mt-1">
+									Sri Narayana High School, Hyderabad
+								</p>
+
+								<div className="flex gap-4 mt-3 text-sm text-muted-foreground">
+									<span>2020 – 2021</span>
+									<span>CGPA: 10</span>
+								</div>
+
+								<p className="mt-4 text-sm text-muted-foreground">
+									Developed discipline, curiosity, and consistency —
+									the habits that shaped my early learning journey.
+								</p>
+							</CardContent>
+						</Card>
+
+						{/* NEW School GIF + Cute Hover */}
+						<div className="flex justify-center">
+							<motion.img
+								src="/gifs/education/schl.gif"
+								alt="Cute school animation"
+								className="w-60 h-60 object-contain bg-transparent"
+								animate={{ y: [0, -8, 0] }}
+								whileHover={{
+									scale: 1.15,
+									rotate: -3,
+								}}
+								transition={{ repeat: Infinity, duration: 4 }}
+							/>
+						</div>
+					</motion.div>
+
+				</div>
 			</div>
-		</div>
+		</section>
 	);
 }

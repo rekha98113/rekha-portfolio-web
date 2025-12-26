@@ -1,110 +1,124 @@
-import Link from 'next/link';
-import { Linkedin, Github, Twitter, Facebook, Instagram, Phone, Mail, MessageSquare } from 'lucide-react';
+'use client';
 
-import { siteConfig } from '@/lib/constants';
-import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import {
+	Mail,
+	Phone,
+	Linkedin,
+	Github,
+	FileText
+} from 'lucide-react';
 
 export function Footer() {
-	const currentYear = new Date().getFullYear();
-
-	const socialLinks = [
-		{ icon: <Phone className="h-5 w-5" />, href: siteConfig.links.phone, label: 'Phone' },
-		{ icon: <Mail className="h-5 w-5" />, href: siteConfig.links.email, label: 'Email' },
-		{ icon: <Linkedin className="h-5 w-5" />, href: siteConfig.links.linkedin, label: 'LinkedIn' },
-		{ icon: <Github className="h-5 w-5" />, href: siteConfig.links.github, label: 'GitHub' },
-		{ icon: <MessageSquare className="h-5 w-5" />, href: siteConfig.links.whatsapp, label: 'WhatsApp' },
-		{ icon: <Twitter className="h-5 w-5" />, href: siteConfig.links.twitter, label: 'Twitter' },
-		{ icon: <Facebook className="h-5 w-5" />, href: siteConfig.links.facebook, label: 'Facebook' },
-		{ icon: <Instagram className="h-5 w-5" />, href: siteConfig.links.instagram, label: 'Instagram' },
-	];
-
-	const navColumns = [
-		{
-			title: 'About',
-			links: [
-				{ title: 'About Me', href: '/about' },
-				{ title: 'Education', href: '/education' },
-				{ title: 'Skills', href: '/skills' },
-			],
-		},
-		{
-			title: 'Work',
-			links: [
-				{ title: 'Experience', href: '/experience' },
-				{ title: 'Projects', href: '/projects' },
-				{ title: 'Certificates', href: '/certificates' },
-			],
-		},
-		{
-			title: 'Connect',
-			links: [
-				{ title: 'Blog', href: '/blog' },
-				{ title: 'Contact', href: '/contact' },
-				{ title: 'Resume', href: '#', download: true },
-			],
-		},
-	];
-
 	return (
-		<footer className="bg-card py-12 border-t">
-			<div className="container px-4 mx-auto">
-				<div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-					<div className="md:col-span-1">
-						<Link href="/" className="inline-block">
-							<span className="text-2xl font-bold text-gradient">Portfolio</span>
-						</Link>
-						<p className="mt-4 text-sm text-muted-foreground">
-							A professional portfolio showcasing my skills, projects, and achievements in engineering.
+		<footer className="border-t border-border/50 bg-background">
+			<div className="container px-6 py-14">
+
+				{/* TOP GRID */}
+				<div className="grid gap-12 md:grid-cols-4">
+
+					{/* BRAND */}
+					<div>
+						<h3 className="text-2xl font-bold text-gradient mb-3">
+							Portfolio
+						</h3>
+						<p className="text-sm text-muted-foreground leading-relaxed">
+							A professional portfolio showcasing my skills,
+							projects, and achievements in engineering.
 						</p>
+
+						{/* CONTACT ICONS */}
 						<div className="mt-6 flex flex-wrap gap-3">
-							{socialLinks.map((link, index) => (
-								<Button key={index} size="icon" variant="outline" asChild>
-									<Link href={link.href} aria-label={link.label} target="_blank" rel="noreferrer">
-										{link.icon}
-									</Link>
-								</Button>
+							{[
+								{
+									icon: Phone,
+									href: 'tel:+919959037430',
+									label: 'Phone',
+								},
+								{
+									icon: Mail,
+									href: 'mailto:rekharuthika065@gmail.com',
+									label: 'Email',
+								},
+								{
+									icon: Linkedin,
+									href: 'https://www.linkedin.com/in/rekharuthika0809',
+									label: 'LinkedIn',
+								},
+								{
+									icon: Github,
+									href: 'https://github.com/rekha98113',
+									label: 'GitHub',
+								},
+								{
+									icon: FileText,
+									href: '/resume.pdf',
+									label: 'Resume',
+								},
+							].map(({ icon: Icon, href, label }, i) => (
+								<motion.a
+									key={i}
+									href={href}
+									target="_blank"
+									rel="noreferrer"
+									whileHover={{ scale: 1.15 }}
+									whileTap={{ scale: 0.95 }}
+									className="p-3 rounded-xl border border-border/50
+										bg-muted/20 hover:bg-primary/10
+										hover:shadow-[0_0_20px_rgba(0,255,255,0.35)]
+										transition-all"
+									aria-label={label}
+								>
+									<Icon className="h-5 w-5 text-primary" />
+								</motion.a>
 							))}
 						</div>
 					</div>
 
-					<div className="md:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-8">
-						{navColumns.map((column, index) => (
-							<div key={index}>
-								<h3 className="font-semibold mb-3">{column.title}</h3>
-								<ul className="space-y-2">
-									{column.links.map((link, linkIndex) => (
-										<li key={linkIndex}>
-											<Link
-												href={link.href}
-												className="text-muted-foreground hover:text-primary text-sm transition-colors"
-												{...(link.download ? { download: true } : {})}
-											>
-												{link.title}
-											</Link>
-										</li>
-									))}
-								</ul>
-							</div>
-						))}
+					{/* ABOUT */}
+					<div>
+						<h4 className="font-semibold mb-4">About</h4>
+						<ul className="space-y-3 text-sm text-muted-foreground">
+							<li><Link href="/about" className="hover:text-primary">About Me</Link></li>
+							<li><Link href="/education" className="hover:text-primary">Education</Link></li>
+							<li><Link href="/skills" className="hover:text-primary">Skills</Link></li>
+						</ul>
+					</div>
+
+					{/* WORK */}
+					<div>
+						<h4 className="font-semibold mb-4">Work</h4>
+						<ul className="space-y-3 text-sm text-muted-foreground">
+							<li><Link href="/projects" className="hover:text-primary">Projects</Link></li>
+							<li><Link href="/certificates" className="hover:text-primary">Certificates</Link></li>
+						</ul>
+					</div>
+
+					{/* CONNECT */}
+					<div>
+						<h4 className="font-semibold mb-4">Connect</h4>
+						<ul className="space-y-3 text-sm text-muted-foreground">
+							<li><Link href="/contact" className="hover:text-primary">Contact</Link></li>
+							<li>
+								<a href="/resume.pdf" target="_blank" className="hover:text-primary">
+									Resume
+								</a>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+
+				{/* BOTTOM BAR */}
+				<div className="mt-12 pt-6 border-t border-border/50 flex flex-col md:flex-row justify-between text-sm text-muted-foreground">
+					<p>© 2025 Engineering Portfolio. All rights reserved.</p>
+					<div className="flex gap-4 mt-2 md:mt-0">
+						<Link href="/privacy" className="hover:text-primary">Privacy Policy</Link>
+						<Link href="/terms" className="hover:text-primary">Terms of Service</Link>
 					</div>
 				</div>
 
-				<Separator className="my-8" />
-
-				<div className="flex flex-col sm:flex-row items-center justify-between text-sm">
-					<p className="text-muted-foreground">
-						© {currentYear} Engineering Portfolio. All rights reserved.
-					</p>
-					<div className="mt-4 sm:mt-0 flex gap-4">
-						<Link href="/privacy" className="text-muted-foreground hover:text-primary transition-colors">
-							Privacy Policy
-						</Link>
-						<Link href="/terms" className="text-muted-foreground hover:text-primary transition-colors">
-							Terms of Service
-						</Link>
-					</div>
-				</div>
 			</div>
 		</footer>
 	);

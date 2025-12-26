@@ -1,81 +1,122 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { FileDown, ExternalLink, Award } from 'lucide-react';
+import Image from 'next/image';
+import { SectionHeader } from '@/components/ui/section-header';
+import { Card, CardContent } from '@/components/ui/card';
 
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter } from '@/components/ui/card';
-import { certificates } from '@/lib/constants';
-import { fadeIn, staggerContainer } from '@/lib/motion';
+const certificates = [
+	{
+		title: 'AWS Cloud Practitioner',
+		image: '/certificates/aws cloud.jpg',
+		issuer: 'Amazon Web Services',
+		year: '2025',
+	},
+	{
+		title: 'Automation Anywhere',
+		image: '/certificates/automation anywhere.png',
+		issuer: 'Automation Anywhere University',
+		year: '2025',
+	},
+	{
+		title: 'Data Structures and Algorithms',
+		image: '/certificates/cps.jpg',
+		issuer: 'Being Zero',
+		year: '2025',
+	},
+	{
+		title: 'InnovateTech Certification',
+		image: '/certificates/innovatech.jpg',
+		issuer: 'KL University',
+		year: '2025',
+	},
+	{
+		title: 'Salesforce Certification',
+		image: '/certificates/salesforce.png',
+		issuer: 'Salesforce',
+		year: '2025',
+	},
+];
 
 export default function CertificatesPage() {
 	return (
-		<div className="py-16 md:py-24">
-			<div className="container">
-				<motion.div
-					variants={staggerContainer()}
-					initial="hidden"
-					animate="show"
-				>
-					<motion.div
-						variants={fadeIn('down', 0.2)}
-						className="text-center mb-12"
-					>
-						<h1 className="text-4xl font-bold mb-4">Certificates</h1>
-						<p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-							Professional certifications and achievements that demonstrate my expertise
-							and commitment to continuous learning.
-						</p>
-					</motion.div>
+		<section className="py-20">
+			<div className="container px-4">
+				<SectionHeader
+					title="Certificates & Achievements"
+					description="Certifications earned through dedication, consistency, and hands-on learning."
+				/>
 
-					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-						{certificates.map((cert, index) => (
+				{/* CERTIFICATES GRID */}
+				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
+
+					{certificates.slice(0, 3).map((cert, index) => (
+						<motion.div
+							key={index}
+							initial={{ opacity: 0, y: 20 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ delay: index * 0.08 }}
+							whileHover={{ scale: 1.04 }}
+						>
+							<CertificateCard cert={cert} />
+						</motion.div>
+					))}
+
+					{/* SECOND ROW — CENTERED */}
+					<div className="lg:col-span-3 flex justify-center gap-8 flex-wrap">
+						{certificates.slice(3).map((cert, index) => (
 							<motion.div
 								key={index}
-								variants={fadeIn('up', 0.2 * index)}
+								initial={{ opacity: 0, y: 20 }}
+								animate={{ opacity: 1, y: 0 }}
+								transition={{ delay: (index + 3) * 0.08 }}
+								whileHover={{ scale: 1.04 }}
+								className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1rem)]"
 							>
-								<Card className="card-gradient">
-									<CardContent className="p-6">
-										<div className="flex items-start gap-4">
-											<Award className="h-8 w-8 text-primary shrink-0" />
-											<div>
-												<h2 className="text-xl font-semibold mb-2">{cert.title}</h2>
-												<p className="text-muted-foreground">{cert.issuer}</p>
-												<p className="text-sm text-muted-foreground mt-2">
-													Issued: {cert.date}
-												</p>
-												{cert.id && (
-													<p className="text-sm text-muted-foreground">
-														Certificate ID: {cert.id}
-													</p>
-												)}
-											</div>
-										</div>
-									</CardContent>
-									<CardFooter className="p-6 pt-0 gap-2">
-										{cert.url && (
-											<Button size="sm" variant="outline" asChild>
-												<a href={cert.url} target="_blank" rel="noreferrer">
-													<ExternalLink className="h-4 w-4 mr-2" />
-													Verify
-												</a>
-											</Button>
-										)}
-										{cert.pdf && (
-											<Button size="sm" variant="outline" asChild>
-												<a href={cert.pdf} download>
-													<FileDown className="h-4 w-4 mr-2" />
-													Download
-												</a>
-											</Button>
-										)}
-									</CardFooter>
-								</Card>
+								<CertificateCard cert={cert} />
 							</motion.div>
 						))}
 					</div>
-				</motion.div>
+
+				</div>
 			</div>
-		</div>
+		</section>
+	);
+}
+
+/* 🔹 Reusable Card Component */
+function CertificateCard({ cert }: { cert: any }) {
+	return (
+		<Card className="card-gradient w-full max-w-md mx-auto transition hover:shadow-[0_0_25px_rgba(173,216,230,0.25)]">
+			<CardContent className="p-5">
+				<h3 className="font-semibold mb-3 text-center">
+					{cert.title}
+				</h3>
+
+				<div className="relative w-full h-44 mb-4">
+					<Image
+						src={cert.image}
+						alt={cert.title}
+						fill
+						className="object-contain rounded-md"
+					/>
+				</div>
+
+				<div className="text-center text-sm text-muted-foreground space-y-1">
+					<p>
+						<span className="font-medium text-foreground">
+							Presented by:
+						</span>{' '}
+						{cert.issuer}
+					</p>
+					<p>
+						<span className="font-medium text-foreground">
+							Year:
+						</span>{' '}
+						{cert.year}
+					</p>
+				</div>
+			</CardContent>
+		</Card>
 	);
 }

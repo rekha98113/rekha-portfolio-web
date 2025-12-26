@@ -1,104 +1,108 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Code2, Cpu, Brain, Languages } from 'lucide-react';
-
+import { SectionHeader } from '@/components/ui/section-header';
 import { Card, CardContent } from '@/components/ui/card';
-import { skills } from '@/lib/constants';
-import { fadeIn, staggerContainer } from '@/lib/motion';
 
 export default function SkillsPage() {
-	const technicalSkills = skills.filter(skill => skill.category === 'technical');
-	const softwareSkills = skills.filter(skill => skill.category === 'software');
-	const softSkills = skills.filter(skill => skill.category === 'soft');
-	const languageSkills = skills.filter(skill => skill.category === 'language');
+	return (
+		<section className="py-20 relative overflow-hidden">
+			<div className="container px-4">
+				<SectionHeader
+					title="Skills"
+					description="Focused learning, cozy coding vibes, and continuous improvement."
+				/>
 
-	const SkillCategory = ({
-		title,
-		skills,
-		icon,
-		delay
-	}: {
-		title: string;
-		skills: typeof technicalSkills;
-		icon: React.ReactNode;
-		delay: number;
-	}) => (
-		<motion.div variants={fadeIn('up', delay)}>
-			<Card className="card-gradient">
-				<CardContent className="p-6">
-					<div className="flex items-center gap-2 mb-6">
-						{icon}
-						<h2 className="text-2xl font-semibold">{title}</h2>
-					</div>
-					<div className="space-y-4">
-						{skills.map((skill, index) => (
-							<div key={index}>
-								<div className="flex justify-between mb-1">
-									<span>{skill.name}</span>
-									<span className="text-muted-foreground">{skill.level}/10</span>
-								</div>
-								<div className="skill-bar">
-									<motion.div
-										className="skill-progress"
-										initial={{ width: 0 }}
-										whileInView={{ width: `${skill.level * 10}%` }}
-										viewport={{ once: true }}
-										transition={{ duration: 1, delay: index * 0.1 }}
-									/>
-								</div>
-							</div>
+				<div className="grid lg:grid-cols-3 gap-12 mt-16 items-center">
+
+					{/* 🧠 SKILLS CARDS */}
+					<div className="lg:col-span-2 grid sm:grid-cols-2 gap-8">
+						{[
+							{
+								title: 'Programming Languages',
+								items: ['C', 'Java', 'Python'],
+							},
+							{
+								title: 'Electronic Design Tools',
+								items: ['LTspice', 'Cadence', 'MATLAB', 'Proteus'],
+							},
+							{
+								title: 'Embedded & IoT',
+								items: ['ESP32', 'ESP8266', 'Arduino', 'STM32', 'PCB Design'],
+							},
+							{
+								title: 'Core Concepts',
+								items: ['DSA', 'Basic Operating Systems'],
+							},
+							{
+								title: 'Web Technologies',
+								items: ['HTML', 'CSS', 'JavaScript (Basics)'],
+							},
+							{
+								title: 'Artificial Intelligence',
+								items: ['Machine Learning (Python)', 'NumPy'],
+							},
+						].map((group, index) => (
+							<motion.div
+								key={index}
+								initial={{ opacity: 0, y: 25 }}
+								animate={{ opacity: 1, y: 0 }}
+								transition={{ delay: index * 0.1 }}
+								whileHover={{ scale: 1.05 }}
+							>
+								<Card className="card-gradient hover:shadow-[0_0_30px_rgba(255,182,193,0.25)] transition">
+									<CardContent className="p-6">
+										<h3 className="text-lg font-bold mb-4 text-primary">
+											{group.title}
+										</h3>
+
+										<ul className="space-y-2 text-sm text-muted-foreground">
+											{group.items.map((item, i) => (
+												<li
+													key={i}
+													className="flex items-center gap-2 hover:text-foreground transition"
+												>
+													<span className="w-2 h-2 rounded-full bg-primary"></span>
+													{item}
+												</li>
+											))}
+										</ul>
+									</CardContent>
+								</Card>
+							</motion.div>
 						))}
 					</div>
-				</CardContent>
-			</Card>
-		</motion.div>
-	);
 
-	return (
-		<div className="py-16 md:py-24">
-			<div className="container">
-				<motion.div
-					variants={staggerContainer()}
-					initial="hidden"
-					animate="show"
-				>
-					<motion.div variants={fadeIn('down', 0.2)} className="text-center mb-12">
-						<h1 className="text-4xl font-bold mb-4">Skills & Expertise</h1>
-						<p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-							A comprehensive overview of my technical abilities, software proficiency,
-							soft skills, and language capabilities.
+					{/* 🎧 ANIME CODING GIRL */}
+					<motion.div
+						initial={{ opacity: 0, scale: 0.9 }}
+						animate={{ opacity: 1, scale: 1 }}
+						transition={{ duration: 0.6 }}
+						className="flex flex-col items-center text-center"
+					>
+						<motion.img
+							src="/skills/skillgif.gif"
+							alt="Anime girl coding with music"
+							className="w-72 h-72 object-contain bg-transparent"
+							animate={{ y: [0, -10, 0] }}
+							whileHover={{
+								scale: 1.1,
+								rotate: 1,
+							}}
+							transition={{
+								repeat: Infinity,
+								duration: 3,
+							}}
+						/>
+
+						<p className="mt-4 text-sm text-muted-foreground max-w-xs">
+							Headphones on 🎧, code flowing,  
+							and learning never paused 🍿
 						</p>
 					</motion.div>
 
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-						<SkillCategory
-							title="Technical Skills"
-							skills={technicalSkills}
-							icon={<Cpu className="h-6 w-6 text-primary" />}
-							delay={0.3}
-						/>
-						<SkillCategory
-							title="Software Proficiency"
-							skills={softwareSkills}
-							icon={<Code2 className="h-6 w-6 text-secondary" />}
-							delay={0.4}
-						/>
-						<SkillCategory
-							title="Soft Skills"
-							skills={softSkills}
-							icon={<Brain className="h-6 w-6 text-accent" />}
-							delay={0.5}
-						/>
-						<SkillCategory
-							title="Languages"
-							skills={languageSkills}
-							icon={<Languages className="h-6 w-6 text-primary" />}
-							delay={0.6}
-						/>
-					</div>
-				</motion.div>
+				</div>
 			</div>
-		</div>
+		</section>
 	);
 }

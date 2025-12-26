@@ -1,130 +1,129 @@
 'use client';
 
-import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Phone, Mail, MapPin, Send } from 'lucide-react';
-
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
+import { Mail, Phone, Linkedin, Github, MapPin } from 'lucide-react';
+import { SectionHeader } from '@/components/ui/section-header';
 import { Card, CardContent } from '@/components/ui/card';
-import { fadeIn, staggerContainer } from '@/lib/motion';
+import { Button } from '@/components/ui/button';
 
 export default function ContactPage() {
-	const [formState, setFormState] = useState({
-		name: '',
-		email: '',
-		subject: '',
-		message: '',
-	});
-
-	const handleChange = (
-		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-	) => {
-		setFormState({
-			...formState,
-			[e.target.name]: e.target.value,
-		});
-	};
-
-	const handleSubmit = (e: React.FormEvent) => {
-		e.preventDefault();
-		// Form submission logic would go here
-		console.log('Form submitted:', formState);
-		alert('Message sent successfully!');
-		setFormState({ name: '', email: '', subject: '', message: '' });
-	};
-
 	return (
-		<div className="py-16 md:py-24">
-			<div className="container">
+		<section className="py-20">
+			<div className="container px-4">
+				<SectionHeader
+					title="Contact"
+					description="Open to opportunities, collaborations, and meaningful conversations."
+				/>
+
+				{/* CONTACT INFO CARDS */}
+				<div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
+
+					<ContactCard icon={<Mail />} title="Email" value="rekharuthika065@gmail.com" link="mailto:rekharuthika065@gmail.com" />
+					<ContactCard icon={<Phone />} title="Phone" value="+91 99590 37430" link="tel:+919959037430" />
+					<ContactCard icon={<MapPin />} title="Location" value="Hyderabad, India" />
+					<ContactCard icon={<Linkedin />} title="LinkedIn" value="linkedin.com/in/rekharuthika0809" link="https://www.linkedin.com/in/rekharuthika0809" />
+					<ContactCard icon={<Github />} title="GitHub" value="github.com/rekha98113" link="https://github.com/rekha98113" />
+
+				</div>
+
+				{/* CONTACT FORM */}
 				<motion.div
-					variants={staggerContainer()}
-					initial="hidden"
-					animate="show"
-					className="max-w-4xl mx-auto"
+					initial={{ opacity: 0, y: 30 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.5 }}
+					className="max-w-2xl mx-auto mt-24"
 				>
-					<motion.div
-						variants={fadeIn('down', 0.2)}
-						className="text-center mb-12"
-					>
-						<h1 className="text-4xl font-bold mb-4">Get in Touch</h1>
-						<p className="text-lg text-muted-foreground">
-							Have a question or want to work together? Feel free to reach out!
-						</p>
-					</motion.div>
+					<Card className="card-gradient">
+						<CardContent className="p-8 space-y-6">
 
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-						<motion.div variants={fadeIn('right', 0.3)}>
-							<Card className="card-gradient h-full">
-								<CardContent className="p-6">
-									<h2 className="text-2xl font-semibold mb-6">Contact Information</h2>
-									<div className="space-y-4">
-										<div className="flex items-center">
-											<Phone className="h-5 w-5 text-primary mr-3" />
-											<p className="text-muted-foreground">+1 234 567 890</p>
-										</div>
-										<div className="flex items-center">
-											<Mail className="h-5 w-5 text-primary mr-3" />
-											<p className="text-muted-foreground">contact@example.com</p>
-										</div>
-										<div className="flex items-center">
-											<MapPin className="h-5 w-5 text-primary mr-3" />
-											<p className="text-muted-foreground">City, Country</p>
-										</div>
-									</div>
-								</CardContent>
-							</Card>
-						</motion.div>
+							<h3 className="text-xl font-semibold text-center">
+								Send a Message
+							</h3>
 
-						<motion.div variants={fadeIn('left', 0.3)}>
-							<form onSubmit={handleSubmit} className="space-y-4">
-								<div>
-									<Input
-										placeholder="Your Name"
-										name="name"
-										value={formState.name}
-										onChange={handleChange}
-										required
-									/>
-								</div>
-								<div>
-									<Input
-										type="email"
-										placeholder="Your Email"
-										name="email"
-										value={formState.email}
-										onChange={handleChange}
-										required
-									/>
-								</div>
-								<div>
-									<Input
-										placeholder="Subject"
-										name="subject"
-										value={formState.subject}
-										onChange={handleChange}
-										required
-									/>
-								</div>
-								<div>
-									<Textarea
-										placeholder="Your Message"
-										name="message"
-										value={formState.message}
-										onChange={handleChange}
-										required
-										className="min-h-[150px]"
-									/>
-								</div>
-								<Button type="submit" className="w-full">
-									Send Message <Send className="ml-2 h-4 w-4" />
-								</Button>
-							</form>
-						</motion.div>
-					</div>
+							{/* NAME */}
+							<input
+								type="text"
+								placeholder="Your Name"
+								className="w-full px-4 py-3 rounded-md bg-background border border-muted focus:outline-none focus:ring-2 focus:ring-primary"
+							/>
+
+							{/* EMAIL */}
+							<input
+								type="email"
+								placeholder="Your Email"
+								className="w-full px-4 py-3 rounded-md bg-background border border-muted focus:outline-none focus:ring-2 focus:ring-primary"
+							/>
+
+							{/* DROPDOWN / SUGGESTION BOX */}
+							<select
+								className="w-full px-4 py-3 rounded-md bg-background border border-muted focus:outline-none focus:ring-2 focus:ring-primary"
+							>
+								<option value="">Reason for Contact</option>
+								<option>Internship / Job Opportunity</option>
+								<option>Project Collaboration</option>
+								<option>Research / Academic Discussion</option>
+								<option>Portfolio Feedback</option>
+								<option>General Query</option>
+							</select>
+
+							{/* MESSAGE */}
+							<textarea
+								placeholder="Your Message"
+								rows={4}
+								className="w-full px-4 py-3 rounded-md bg-background border border-muted focus:outline-none focus:ring-2 focus:ring-primary resize-none"
+							/>
+
+							{/* SUBMIT */}
+							<Button className="w-full">
+								Send Message
+							</Button>
+
+						</CardContent>
+					</Card>
 				</motion.div>
+
 			</div>
-		</div>
+		</section>
+	);
+}
+
+/* 🔹 Reusable Contact Card */
+function ContactCard({
+	icon,
+	title,
+	value,
+	link,
+}: {
+	icon: React.ReactNode;
+	title: string;
+	value: string;
+	link?: string;
+}) {
+	return (
+		<motion.div
+			initial={{ opacity: 0, y: 20 }}
+			animate={{ opacity: 1, y: 0 }}
+			whileHover={{ scale: 1.05 }}
+		>
+			<Card className="card-gradient transition hover:shadow-[0_0_25px_rgba(99,102,241,0.25)]">
+				<CardContent className="p-6 flex flex-col items-center text-center space-y-3">
+					<div className="text-primary w-8 h-8">{icon}</div>
+					<h3 className="font-semibold">{title}</h3>
+
+					{link ? (
+						<a
+							href={link}
+							target="_blank"
+							rel="noreferrer"
+							className="text-sm text-muted-foreground hover:text-primary transition"
+						>
+							{value}
+						</a>
+					) : (
+						<p className="text-sm text-muted-foreground">{value}</p>
+					)}
+				</CardContent>
+			</Card>
+		</motion.div>
 	);
 }

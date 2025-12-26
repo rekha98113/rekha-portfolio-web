@@ -1,21 +1,26 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	output: 'export',
-	eslint: {
-		ignoreDuringBuilds: true,
-	},
-	devIndicators: false,
-	images: { unoptimized: true },
-	webpack: (config, { isServer }) => {
-		// Disable cache for both client and server builds
-		config.cache = false;
-		return config;
-	},
-	// Add experimental features to handle client pages properly
-	experimental: {
-		appDir: true,
-		serverActions: true
-	}
+  // Required for static export (GitHub Pages / Netlify / Vercel static)
+  output: 'export',
+
+  // Ignore ESLint errors during production build
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+
+  // Disable dev build indicators
+  devIndicators: false,
+
+  // Required for static export image handling
+  images: {
+    unoptimized: true,
+  },
+
+  // Disable webpack caching to avoid stale builds
+  webpack: (config) => {
+    config.cache = false;
+    return config;
+  },
 };
 
 module.exports = nextConfig;
