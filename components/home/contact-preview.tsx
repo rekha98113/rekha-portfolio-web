@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send } from 'lucide-react';
 
@@ -11,26 +10,6 @@ import { SectionHeader } from '@/components/ui/section-header';
 import { fadeIn } from '@/lib/motion';
 
 export function ContactPreview() {
-	const [formState, setFormState] = useState({
-		name: '',
-		email: '',
-		message: '',
-	});
-
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-		setFormState({
-			...formState,
-			[e.target.name]: e.target.value,
-		});
-	};
-
-	const handleSubmit = (e: React.FormEvent) => {
-		e.preventDefault();
-		// Form submission would be handled here
-		alert('Form submitted! This is a demo - no actual email is sent.');
-		setFormState({ name: '', email: '', message: '' });
-	};
-
 	return (
 		<section className="py-16 md:py-24 bg-muted/30">
 			<div className="container px-4">
@@ -47,36 +26,41 @@ export function ContactPreview() {
 					viewport={{ once: true }}
 					className="max-w-md mx-auto mt-10"
 				>
-					<form onSubmit={handleSubmit} className="space-y-4">
+					<form
+						action="https://formspree.io/f/maqyebzn"
+						method="POST"
+						className="space-y-4"
+					>
+						{/* Redirect after submit */}
+						<input type="hidden" name="_next" value="/?success=true" />
+
 						<div>
 							<Input
+								type="text"
 								name="name"
 								placeholder="Your Name"
-								value={formState.name}
-								onChange={handleChange}
 								required
 							/>
 						</div>
+
 						<div>
 							<Input
-								name="email"
 								type="email"
+								name="email"
 								placeholder="Your Email"
-								value={formState.email}
-								onChange={handleChange}
 								required
 							/>
 						</div>
+
 						<div>
 							<Textarea
 								name="message"
 								placeholder="Your Message"
-								value={formState.message}
-								onChange={handleChange}
 								required
 								className="min-h-[150px]"
 							/>
 						</div>
+
 						<Button type="submit" className="w-full">
 							Send Message <Send className="ml-2 h-4 w-4" />
 						</Button>
