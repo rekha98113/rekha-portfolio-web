@@ -19,16 +19,16 @@ const projects = [
 		tags: ['ESP32', 'Embedded C', 'IoT', 'Robotics'],
 	},
 	{
-		title: 'Human Activity Recognition using Deep Learning',
+		title: 'Gesture Controlled User Interface',
 		description:
-			'Designed and compared deep learning architectures for video-based human activity recognition. Evaluated accuracy and performance metrics to identify the most efficient model for real-time prediction.',
+			'Built a real-time gesture-driven interface enabling touchless interaction with digital systems. Focused on low-latency execution and efficient signal interpretation for smooth user experience.',
 		image: '/projects/HAR.jpg',
-		tags: ['Deep Learning', 'Python', 'Computer Vision'],
+		tags: ['OpenCV', 'Python'],
 	},
 	{
 		title: 'Smart Traffic Management using Edge AI (Ongoing)',
 		description:
-			'Developing an intelligent traffic monitoring system using Edge AI for real-time vehicle detection and adaptive signal control. Focused on deploying optimized CNN models on edge devices to minimize latency and improve traffic flow efficiency.',
+			'Developing an intelligent traffic monitoring system using Edge AI for real-time vehicle detection and adaptive signal control. Focused on deploying optimized CNN models on edge devices to minimize latency and improve traffic flow efficiency. Secured 1 Lakh funding from TiHAN, IIT Hyderabad for Edge AI Traffic Management system.',
 		image: '/projects/traffic.jpg',
 		tags: ['Edge AI', 'CNN', 'Smart Cities'],
 	},
@@ -58,7 +58,6 @@ export function ProjectsPreview() {
 						>
 							<Card className="flex flex-col h-full card-gradient hover:shadow-[0_0_40px_rgba(0,255,255,0.18)] transition">
 								
-								{/* Project Image */}
 								<div className="relative h-48 w-full overflow-hidden rounded-t-lg">
 									<img
 										src={project.image}
@@ -67,7 +66,6 @@ export function ProjectsPreview() {
 									/>
 								</div>
 
-								{/* Project Content */}
 								<CardContent className="p-6 flex flex-col flex-grow">
 									<h3 className="text-xl font-bold mb-3">
 										{project.title}

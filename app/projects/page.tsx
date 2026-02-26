@@ -15,9 +15,9 @@ const projects = [
 		tags: ['ESP32', 'IoT', 'Robotics'],
 	},
 	{
-		title: 'Human Activity Recognition',
+		title: 'Gesture controlled UI',
 		description:
-			'Deep learning-based video activity recognition using CNN architectures.',
+			'Built a real-time gesture-driven interface enabling touchless interaction with digital systems. Focused on low-latency execution and efficient signal interpretation for smooth user experience.',
 		image: '/projects/HAR.jpg',
 		tags: ['Deep Learning', 'CNN'],
 	},
