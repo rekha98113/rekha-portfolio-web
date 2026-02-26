@@ -17,7 +17,7 @@ const projects = [
 	{
 		title: 'Gesture controlled UI',
 		description:
-			'Built a real-time gesture-driven interface enabling touchless interaction with digital systems. Focused on low-latency execution and efficient signal interpretation for smooth user experience.',
+			'Built a real-time gesture-driven interface enabling touchless interaction with digital systems. Focused on low-latency execution and efficient signal interpretation for smooth user experience platform.',
 		image: '/projects/HAR.jpg',
 		tags: ['Deep Learning', 'CNN'],
 	},

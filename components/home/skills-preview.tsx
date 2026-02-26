@@ -32,7 +32,7 @@ const skillDomains = [
 	},
 	{
 		title: 'Web Technologies',
-		skills: ['HTML', 'CSS', 'JavaScript'],
+		skills: ['HTML', 'CSS', 'JavaScript', 'Firebase', 'Next.js'],
 	},
 ];
 

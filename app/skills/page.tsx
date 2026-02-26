@@ -36,7 +36,7 @@ export default function SkillsPage() {
 							},
 							{
 								title: 'Web Technologies',
-								items: ['HTML', 'CSS', 'JavaScript (Basics)'],
+								items: ['HTML', 'CSS', 'JavaScript (Basics)','Firebase', 'Next.js'],
 							},
 							{
 								title: 'Artificial Intelligence',
